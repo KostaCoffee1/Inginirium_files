@@ -1,0 +1,12 @@
+"""
+def ignore_command(command):
+ignore = ['alias', 'configuration', 'ip', 'sql', 'select', 'update', 'exec', 'del', 'truncate']
+for word in ignore:
+    if word in command:
+        return True
+return False
+"""
+# если слово, поданное на вход встречается в списке ignore, то выводится True
+ignore_command = lambda command: True if command in ['alias', 'configuration', 'ip', 'sql', 'select', 'update', 'exec',
+                                                     'del', 'truncate'] else False
+print(ignore_command(input()))
