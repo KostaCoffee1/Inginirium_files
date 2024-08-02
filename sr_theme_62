@@ -1,0 +1,36 @@
+import matplotlib.pyplot as plt
+from matplotlib import ticker
+
+fig, ax = plt.subplots(nrows=9, layout='constrained')
+
+text_samples = ['Отображение в km', 'def(x, pos): return str(x - 5)', 'NullFormatter()', "StrMethodFormatter('{x:.3f}'",
+                "FormatStrFormatter('#%d')", "FixedFormatter(['A', 'B', 'C', 'D', 'E', 'F'])", 'ScalarFormatter()',
+                'PercentFormatter(xmax=5)']
+
+for i in range(0, 8):
+    ax[i].spines[['left', 'top', 'right']].set_visible(False)
+    ax[i].tick_params(axis='y', labelcolor='white', color='white')  # это костыль, но он работает
+    ax[i].set_xlim(xmin=0, xmax=5)
+    ax[i].xaxis.set_minor_locator(ticker.MultipleLocator(0.25))
+    ax[i].text(0.0, 0.2, text_samples[i], color='tab:blue')
+
+ax[0].set_title('Форматирование строк', loc='left', fontsize=12)
+ax[0].xaxis.set_major_formatter('{x} km')
+
+ax[1].set_title('Форматирование функций', loc='left')
+ax[1].xaxis.set_major_formatter(lambda x, pos: str(x - 5))
+
+ax[2].set_title('Formatter Object Formatting', loc='left')
+ax[2].xaxis.set_major_formatter(ticker.NullFormatter())
+
+ax[3].xaxis.set_major_formatter(ticker.StrMethodFormatter('{x:.3f}'))
+
+ax[4].xaxis.set_major_formatter(ticker.FormatStrFormatter('#%d'))
+
+ax[5].xaxis.set_major_formatter(ticker.FixedFormatter(['A', 'B', 'C', 'D', 'E', 'F']))
+
+ax[6].xaxis.set_major_formatter(ticker.ScalarFormatter())
+
+ax[7].xaxis.set_major_formatter(ticker.PercentFormatter(xmax=5))
+
+plt.show()
